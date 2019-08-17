@@ -85,7 +85,7 @@ namespace Sis.Web.Controllers
 
         // POST: Products/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]  
         public async Task<IActionResult> Edit(Product product)
         {
             if (ModelState.IsValid)
