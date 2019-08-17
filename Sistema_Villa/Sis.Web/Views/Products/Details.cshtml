@@ -1,7 +1,7 @@
 ﻿@model Sis.Web.Data.Entities.Product
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detailles";
 }
 
 <h1>Details</h1>
@@ -55,6 +55,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-danger">Editar</a> |
+    <a asp-action="Index" class="btn btn-outline-info">Volver a la lista</a>
 </div>
