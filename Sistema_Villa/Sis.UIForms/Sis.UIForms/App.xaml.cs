@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Sis.UIForms.ViewModels;
+using Sis.UIForms.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,8 +11,8 @@ namespace Sis.UIForms
         public App()
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
+            MainViewModel.GetInstance().Login=new LoginViewModel();
+            this.MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()
