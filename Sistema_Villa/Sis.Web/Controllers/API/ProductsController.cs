@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Sis.Web.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 
 namespace Sis.Web.Controllers.API
 {
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using Data;
     [Route("api/[Controller]")]
-    public class ProductsController:Controller
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public class ProductsController : Controller
     {
         private readonly IProductRepository productRepository;
 

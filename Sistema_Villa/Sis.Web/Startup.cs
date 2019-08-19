@@ -18,6 +18,10 @@ namespace Sis.Web
     using Data;
     using Data.Entities;
     using Helpers;
+    using Microsoft.IdentityModel.Tokens;
+    using System.Text;
+    using Sis.Web.Data.Repositories;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -30,6 +34,19 @@ namespace Sis.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication()
+                .AddCookie()
+                .AddJwtBearer(cfg =>
+                {
+                    cfg.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidIssuer = this.Configuration["Tokens:Issuer"],
+                        ValidAudience = this.Configuration["Tokens:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(this.Configuration["Tokens:Key"]))
+                    };
+                });
+
             services.AddIdentity<User, IdentityRole>(cfg =>
             {
                 cfg.User.RequireUniqueEmail = true;
@@ -53,6 +70,7 @@ namespace Sis.Web
 
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICountryRepository,CountryRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -60,6 +78,13 @@ namespace Sis.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/NotAuthorized";
+                options.AccessDeniedPath = "/Account/NotAuthorized";
+            });
+
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -83,6 +108,8 @@ namespace Sis.Web
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
+            app.UseStatusCodePagesWithReExecute("/error/{0}");
+
 
             app.UseMvc(routes =>
             {
