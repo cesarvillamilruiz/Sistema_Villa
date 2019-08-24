@@ -1,0 +1,33 @@
+﻿@model Sis.Web.Models.DeliverViewModel
+
+@{
+    ViewData["Title"] = "Deliver";
+}
+
+<h2>Deliver</h2>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Deliver">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="DeliveryDate" class="control-label"></label>
+                <input asp-for="DeliveryDate" class="form-control" />
+                <span asp-validation-for="DeliveryDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-success"><i class="fa fa-plus-circle"></i> Guardar</button> |
+                <a asp-action="Index" class="btn btn-secondary"><i class="fa fa-undo"></i> Volver a la lista</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

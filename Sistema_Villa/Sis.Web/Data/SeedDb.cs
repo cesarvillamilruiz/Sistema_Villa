@@ -6,6 +6,7 @@
     using Entities;
     using Microsoft.AspNetCore.Identity;
     using Helpers;
+    using System.Collections.Generic;
 
     public class SeedDb
     {
@@ -28,6 +29,22 @@
             await this.userHelper.CheckRoleAsync("Admin");
             await this.userHelper.CheckRoleAsync("Customer");
 
+            if (!this.context.Countries.Any())
+            {
+                var cities = new List<City>();
+                cities.Add(new City { Name = "Medellín" });
+                cities.Add(new City { Name = "Bogotá" });
+                cities.Add(new City { Name = "Calí" });
+
+                this.context.Countries.Add(new Country
+                {
+                    Cities = cities,
+                    Name = "Colombia"
+                });
+
+                await this.context.SaveChangesAsync();
+            }
+
 
             var user = await this.userHelper.GetUserByEmailAsync("cesar.hades77@gmail.com");
             if (user == null)
@@ -38,7 +55,11 @@
                     LastName = "Villa",
                     Email = "cesar.hades77@gmail.com",
                     UserName = "cesar.hades77@gmail.com",
-                    PhoneNumber="3203845445"
+                    PhoneNumber="3203845445",
+                    Address = "Calle Luna Calle Sol",
+                    CityId = this.context.Countries.FirstOrDefault().Cities.FirstOrDefault().Id,
+                    City = this.context.Countries.FirstOrDefault().Cities.FirstOrDefault()
+
                 };
 
                 var result = await this.userHelper.AddUserAsync(user, "123456");
@@ -47,6 +68,9 @@
                     throw new InvalidOperationException("Could not create the user in seeder");
                 }
                 await this.userHelper.AddUserToRoleAsync(user, "Admin");
+                var token = await this.userHelper.GenerateEmailConfirmationTokenAsync(user);
+                await this.userHelper.ConfirmEmailAsync(user, token);
+
             }
 
             var isInRole = await this.userHelper.IsUserInRoleAsync(user, "Admin");

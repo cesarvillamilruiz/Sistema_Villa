@@ -1,6 +1,7 @@
 ﻿
 namespace Sis.Web.Data.Entities
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class OrderDetail : IEntity
@@ -8,7 +9,7 @@ namespace Sis.Web.Data.Entities
         public int Id { get; set; }
 
         [Required]
-        public Product Product { get; set; }
+        public Product Product{ get; set; }
 
         [DisplayFormat(DataFormatString = "{0:C2}")]
         public decimal Price { get; set; }

@@ -1,6 +1,7 @@
 ﻿
 namespace Sis.Web.Controllers
 {
+    using System;
     using System.Threading.Tasks;
     using Data;
     using Microsoft.AspNetCore.Authorization;
@@ -101,6 +102,55 @@ namespace Sis.Web.Controllers
             return this.RedirectToAction("Create");
         }
 
+        public async Task<IActionResult> Deliver(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await this.orderRepository.GetOrdersAsync(id.Value);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            var model = new DeliverViewModel
+            {
+                Id = order.Id,
+                DeliveryDate = DateTime.UtcNow
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Deliver(DeliverViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                await this.orderRepository.DeliverOrder(model);
+                return this.RedirectToAction("Index");
+            }
+
+            return this.View();
+        }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await this.orderRepository.GetAllOrderDetails(id.Value);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
 
     }
 
