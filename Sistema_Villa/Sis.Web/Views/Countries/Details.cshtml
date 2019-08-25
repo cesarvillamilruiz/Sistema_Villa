@@ -1,13 +1,13 @@
 ﻿@model Sis.Web.Data.Entities.Country
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles";
 }
 
-<h2>Details</h2>
+<h2 class="text-center">Detalles</h2>
 
 <div>
-    <h4>Country</h4>
+    
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,20 +19,20 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
-    <a asp-action="AddCity" asp-route-id="@Model.Id" class="btn btn-info">Add City</a>
-    <a asp-action="Index" class="btn btn-success">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary"><i class="fa fa-edit"></i></a>
+    <a asp-action="AddCity" asp-route-id="@Model.Id" class="btn btn-outline-success"><i class="fa fa-plus-circle"></i></a>
+    <a asp-action="Index" class="btn btn-secondary"><i class="fa fa-undo"></i> Volver a la lista</a>
 </div>
 
-<h4>Cities</h4>
+
 @if (Model.Cities == null || Model.Cities.Count == 0)
 {
     <h5>No cities added yet</h5>
 }
 else
 {
-    <table class="table">
-        <thead>
+    <table class="table mt-5  col-5 table-hover" >
+        <thead class="thead-dark">
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Cities.FirstOrDefault().Name)
@@ -48,8 +48,8 @@ else
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td id="@item.Id">
-                        <a asp-action="EditCity" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
-                        <a asp-action="DeleteCity" asp-route-id="@item.Id" class="btn btn-danger" id="btnDelete">Delete</a>
+                        <a asp-action="EditCity" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-edit"></i></a>
+                        <a asp-action="DeleteCity" asp-route-id="@item.Id" class="btn btn-danger" id="btnDelete"><i class="fa fa-trash-o"></i></a>
                     </td>
                 </tr>
             }

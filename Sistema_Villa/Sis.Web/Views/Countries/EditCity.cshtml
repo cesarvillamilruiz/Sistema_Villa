@@ -4,7 +4,7 @@
     ViewData["Title"] = "EditCity";
 }
 
-<h4>City</h4>
+<h4 class="text-center">Ciudad</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,8 +18,9 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-success">Back to List</a>
+                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button> |
+                <a asp-action="Index" class="btn btn-secondary"><i class="fa fa-undo"></i> Back to List</a>
+
             </div>
         </form>
     </div>

@@ -4,23 +4,9 @@
     ViewData["Title"] = "Detalles";
 }
 
-<h2>Detalles de la orden</h2>
-
-@*<div>
-    <h4>Orden</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Product)
-        </dd>
-    </dl>
-</div>*@
+<h2 class="text-center">Detalles de la orden</h2>
 
 
-<h4>Productos</h4>
 @if (Model.Id==0)
 {
     <h5>No cities added yet</h5>
@@ -65,3 +51,6 @@ else
         </tbody>
     </table>
 }
+
+<h3>Total</h3><br />
+<h3>@Model.Value</h3>

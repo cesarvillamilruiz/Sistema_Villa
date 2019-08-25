@@ -33,7 +33,8 @@ namespace Sis.Web.Data
 
         public async Task<int> DeleteCityAsync(City city)
         {
-            var country = await this.context.Countries.Where(c => c.Cities.Any(ci => ci.Id == city.Id)).FirstOrDefaultAsync();
+            var country = await this.context.Countries.Where(
+                c => c.Cities.Any(ci => ci.Id == city.Id)).FirstOrDefaultAsync();
             if (country == null)
             {
                 return 0;

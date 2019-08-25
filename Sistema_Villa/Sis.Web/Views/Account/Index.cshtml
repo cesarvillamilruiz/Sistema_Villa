@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Sis.Web.Data.Entities.User>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Usuarios";
 }
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
@@ -72,15 +72,15 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.EmailConfirmed)
                                 </td>
-                                <td>
-                                    <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog">Delete</button>
+                                <td class="col-6">
+                                    <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="fa fa-trash-o"></i></button>
                                     @if (item.IsAdmin)
                                     {
-                                        <a asp-action="AdminOff" asp-route-id="@item.Id" class="btn btn-warning">Admin Off</a>
+                                        <a asp-action="AdminOff" asp-route-id="@item.Id" class="btn btn-warning"><i class="fa fa-power-off"></i> Admin Off</a>
                                     }
                                     else
                                     {
-                                        <a asp-action="AdminOn" asp-route-id="@item.Id" class="btn btn-primary">Admin On</a>
+                                <a asp-action="AdminOn" asp-route-id="@item.Id" class="btn btn-primary"><i class="fa fa-power-off"></i> Admin On</a>
                                     }
                                 </td>
                             </tr>

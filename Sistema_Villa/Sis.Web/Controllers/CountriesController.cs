@@ -173,8 +173,6 @@ namespace Sis.Web.Controllers
                 return NotFound();
             }
 
-            
-
             var country = await this.countryRepository.GetByIdAsync(id.Value);
             if (country == null)
             {

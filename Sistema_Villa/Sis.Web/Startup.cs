@@ -21,6 +21,7 @@ namespace Sis.Web
     using Microsoft.IdentityModel.Tokens;
     using System.Text;
     using Sis.Web.Data.Repositories;
+    
 
     public class Startup
     {
@@ -115,6 +116,7 @@ namespace Sis.Web
             app.UseAuthentication();
             app.UseStatusCodePagesWithReExecute("/error/{0}");
 
+            
 
             app.UseMvc(routes =>
             {

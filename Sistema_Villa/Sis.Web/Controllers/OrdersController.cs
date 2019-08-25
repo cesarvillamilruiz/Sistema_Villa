@@ -1,13 +1,15 @@
 ﻿
 namespace Sis.Web.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
     using Data;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Sis.Web.Data.Entities;
     using Sis.Web.Data.Repositories;
     using Sis.Web.Models;
+    using System;
+    using System.Threading.Tasks;
+
 
     [Authorize]
     public class OrdersController : Controller
@@ -15,7 +17,7 @@ namespace Sis.Web.Controllers
         private readonly IOrderRepository orderRepository;
         private readonly IProductRepository productRepository;
 
-        public OrdersController(IOrderRepository orderRepository,IProductRepository productRepository)
+        public OrdersController(IOrderRepository orderRepository, IProductRepository productRepository)
         {
             this.orderRepository = orderRepository;
             this.productRepository = productRepository;
@@ -153,5 +155,6 @@ namespace Sis.Web.Controllers
         }
 
     }
+
 
 }
